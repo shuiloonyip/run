@@ -1,0 +1,9 @@
+:root {
+  --main-text: rgb(32, 32, 32);
+  --light-text: rgb(163, 163, 163);
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--main-text);
+}

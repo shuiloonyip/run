@@ -1,0 +1,16 @@
+.containerTop {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.containerBottom {
+  display: flex;
+}
+
+.date {
+  margin-right: 10px;
+}
+
+.type {
+  color: var(--light-text);
+}
