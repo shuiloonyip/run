@@ -1,4 +1,5 @@
 import RunList from "../RunList/RunList";
+import RunForm from "../RunForm/RunForm";
 import styles from "./Run.module.css";
 
 const DUMMYDATA = [
@@ -35,6 +36,7 @@ const DUMMYDATA = [
 function Run() {
   return (
     <div>
+      <RunForm />
       <RunList runData={DUMMYDATA} />
     </div>
   );
