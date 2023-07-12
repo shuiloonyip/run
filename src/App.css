@@ -1,9 +1,17 @@
 :root {
-  --main-text: rgb(32, 32, 32);
-  --light-text: rgb(163, 163, 163);
+  --text-primary: rgb(32, 32, 32);
+  --text-secondary: rgb(163, 163, 163);
+  --bg-card: #ffffff;
+  --bg-gradient-primary: #f1f1eb;
+  --bg-gradient-secondary: #edeef3;
 }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  color: var(--main-text);
+  color: var(--text-primary);
+  background: radial-gradient(
+    circle at top,
+    var(--bg-gradient-primary),
+    var(--bg-gradient-secondary)
+  );
 }

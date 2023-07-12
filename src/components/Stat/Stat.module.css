@@ -2,12 +2,15 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+}
+
+.number {
   font-size: 1.2rem;
   font-weight: bold;
 }
 
 .label {
   font-size: 0.8rem;
-  color: var(--light-text);
+  color: var(--text-secondary);
   font-weight: normal;
 }
