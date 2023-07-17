@@ -2,7 +2,7 @@ import { useState } from "react";
 import Card from "../../ui/Card/Card";
 import styles from "./RunForm.module.css";
 
-function RunForm() {
+function RunForm({ onAddRun }) {
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [title, setTitle] = useState("Easy run");
   const [distance, setDistance] = useState("0");
@@ -36,11 +36,16 @@ function RunForm() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log({
-      date,
+    onAddRun({
+      id: crypto.randomUUID(),
+      date: new Date(date),
       title,
-      distance,
-      time: { hours, minutes, seconds },
+      distance: Number(distance),
+      time: {
+        hours: Number(hours),
+        minutes: Number(minutes),
+        seconds: Number(seconds),
+      },
     });
   }
 
