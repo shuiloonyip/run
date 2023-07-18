@@ -4,5 +4,12 @@
     rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
   margin: 15px;
   padding: 15px 30px;
+}
+
+.white {
   background-color: var(--bg-card);
+}
+
+.purple {
+  background-color: #e1d5f1;
 }

@@ -1,7 +1,7 @@
 import styles from "./Card.module.css";
 
-function Card({ children }) {
-  return <div className={styles.card}>{children}</div>;
+function Card({ children, bg = "white" }) {
+  return <div className={styles.card + " " + styles[bg]}>{children}</div>;
 }
 
 export default Card;

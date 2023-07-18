@@ -50,8 +50,9 @@ function RunForm({ onAddRun }) {
   }
 
   return (
-    <Card>
-      <form onSubmit={handleSubmit}>
+    <Card bg="purple">
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <h2>Add run</h2>
         <div>
           <label>Date</label>
           <input
@@ -74,43 +75,45 @@ function RunForm({ onAddRun }) {
             required
           />
         </div>
-        <div>
-          <label>Hours</label>
-          <input
-            type="number"
-            onChange={handleHoursChange}
-            value={hours}
-            step={1}
-            min={0}
-            max={24}
-            required
-          />
+        <div className={styles.time}>
+          <div>
+            <label>Hours</label>
+            <input
+              type="number"
+              onChange={handleHoursChange}
+              value={hours}
+              step={1}
+              min={0}
+              max={24}
+              required
+            />
+          </div>
+          <div>
+            <label>Minutes</label>
+            <input
+              type="number"
+              onChange={handleMinutesChange}
+              value={minutes}
+              step={1}
+              min={0}
+              max={59}
+              required
+            />
+          </div>
+          <div>
+            <label>Seconds</label>
+            <input
+              type="number"
+              onChange={handleSecondsChange}
+              value={seconds}
+              step={1}
+              min={0}
+              max={59}
+              required
+            />
+          </div>
         </div>
-        <div>
-          <label>Minutes</label>
-          <input
-            type="number"
-            onChange={handleMinutesChange}
-            value={minutes}
-            step={1}
-            min={0}
-            max={59}
-            required
-          />
-        </div>
-        <div>
-          <label>Seconds</label>
-          <input
-            type="number"
-            onChange={handleSecondsChange}
-            value={seconds}
-            step={1}
-            min={0}
-            max={59}
-            required
-          />
-        </div>
-        <div>
+        <div className={styles.buttonContainer}>
           <button type="submit">Add</button>
           <button type="button">Cancel</button>
         </div>
