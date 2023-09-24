@@ -4,7 +4,6 @@ import styles from "./RunForm.module.css";
 
 function RunForm({ onAddRun }) {
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
-  const [title, setTitle] = useState("Easy run");
   const [distance, setDistance] = useState("0");
   const [hours, setHours] = useState("0");
   const [minutes, setMinutes] = useState("0");
@@ -12,10 +11,6 @@ function RunForm({ onAddRun }) {
 
   function handleDateChange(event) {
     setDate(event.target.value);
-  }
-
-  function handleTitleChange(event) {
-    setTitle(event.target.value);
   }
 
   function handleDistanceChange(event) {
@@ -39,7 +34,6 @@ function RunForm({ onAddRun }) {
     onAddRun({
       id: crypto.randomUUID(),
       date: new Date(date),
-      title,
       distance: Number(distance),
       time: {
         hours: Number(hours),
@@ -61,10 +55,6 @@ function RunForm({ onAddRun }) {
             value={date}
             required
           />
-        </div>
-        <div>
-          <label>Title</label>
-          <input onChange={handleTitleChange} value={title} required />
         </div>
         <div>
           <label>Distance</label>

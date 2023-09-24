@@ -11,7 +11,6 @@ function RunList({ runs }) {
           date={item.date.toLocaleDateString()}
           distance={item.distance}
           time={item.time}
-          title={item.title}
         />
       ))}
     </div>

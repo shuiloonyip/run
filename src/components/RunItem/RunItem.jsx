@@ -2,12 +2,11 @@ import Card from "../../ui/Card/Card";
 import Stat from "../Stat/Stat";
 import styles from "./RunItem.module.css";
 
-function RunItem({ date, distance, time, title }) {
+function RunItem({ date, distance, time }) {
   return (
     <Card>
       <div className={styles.containerTop}>
         <div className={styles.date}>{date}</div>
-        <div className={styles.title}>{title}</div>
       </div>
       <div className={styles.containerBottom}>
         <Stat stat={distance} label={"Distance"} />
