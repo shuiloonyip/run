@@ -1,6 +1,7 @@
 import { useState } from "react";
-import RunList from "../RunList/RunList";
+import RunOverview from "../RunOverview/RunOverview";
 import RunForm from "../RunForm/RunForm";
+import RunList from "../RunList/RunList";
 import styles from "./Run.module.css";
 
 const DUMMYDATA = [
@@ -32,7 +33,8 @@ function Run() {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
+      <RunOverview runs={runs} />
       <RunForm onAddRun={handleAddRun} />
       <RunList runs={runs} />
     </div>

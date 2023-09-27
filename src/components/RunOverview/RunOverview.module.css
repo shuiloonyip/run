@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  padding: 0 30px;
+}
+
+.header button {
+  border: none;
+  background: transparent;
+  font-weight: bold;
+}
+
+.timeperiod {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.miles {
+  font-size: 5rem;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.label {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-weight: normal;
+}
