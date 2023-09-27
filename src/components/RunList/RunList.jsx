@@ -10,7 +10,7 @@ function RunList({ runs }) {
           id={item.id}
           date={item.date.toLocaleDateString()}
           distance={item.distance}
-          time={item.time}
+          seconds={item.seconds}
         />
       ))}
     </div>

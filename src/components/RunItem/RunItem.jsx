@@ -2,7 +2,19 @@ import Card from "../../ui/Card/Card";
 import Stat from "../Stat/Stat";
 import styles from "./RunItem.module.css";
 
-function RunItem({ date, distance, time }) {
+function RunItem({ date, distance, seconds }) {
+  function toHHMMSS(sec) {
+    const hours = Math.floor(sec / 3600);
+    const minutes = Math.floor((sec % 3600) / 60);
+    const seconds = sec % 60;
+
+    return { hours, minutes, seconds };
+  }
+
+  const hours = toHHMMSS(seconds).hours;
+  const minutes = toHHMMSS(seconds).minutes;
+  const secs = toHHMMSS(seconds).seconds;
+
   return (
     <Card>
       <div className={styles.containerTop}>
@@ -12,14 +24,7 @@ function RunItem({ date, distance, time }) {
         <Stat stat={distance} label={"Distance"} />
         <Stat stat={"11\"00'"} label={"Pace"} />
         <Stat
-          stat={
-            `${time.hours}` +
-            "h" +
-            `${time.minutes}` +
-            "m" +
-            `${time.seconds}` +
-            "s"
-          }
+          stat={`${hours}` + "h" + `${minutes}` + "m" + `${secs}` + "s"}
           label={"Time"}
         />
       </div>

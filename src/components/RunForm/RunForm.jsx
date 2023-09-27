@@ -31,15 +31,15 @@ function RunForm({ onAddRun }) {
 
   function handleSubmit(event) {
     event.preventDefault();
+
+    const totalSeconds =
+      Number(hours) * 3600 + Number(minutes) * 60 + Number(seconds);
+
     onAddRun({
       id: crypto.randomUUID(),
       date: new Date(date),
       distance: Number(distance),
-      time: {
-        hours: Number(hours),
-        minutes: Number(minutes),
-        seconds: Number(seconds),
-      },
+      seconds: totalSeconds,
     });
   }
 
