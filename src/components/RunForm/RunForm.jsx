@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Card from "../../ui/Card/Card";
+import { HHMMSSToSec } from "../../utils/time";
 import styles from "./RunForm.module.css";
 
 function RunForm({ onAddRun }) {
@@ -32,8 +33,7 @@ function RunForm({ onAddRun }) {
   function handleSubmit(event) {
     event.preventDefault();
 
-    const totalSeconds =
-      Number(hours) * 3600 + Number(minutes) * 60 + Number(seconds);
+    const totalSeconds = HHMMSSToSec(hours, minutes, seconds);
 
     onAddRun({
       id: crypto.randomUUID(),

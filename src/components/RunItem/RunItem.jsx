@@ -1,19 +1,12 @@
 import Card from "../../ui/Card/Card";
 import Stat from "../Stat/Stat";
+import { secToHHMMSS } from "../../utils/time";
 import styles from "./RunItem.module.css";
 
 function RunItem({ date, distance, seconds }) {
-  function toHHMMSS(sec) {
-    const hours = Math.floor(sec / 3600);
-    const minutes = Math.floor((sec % 3600) / 60);
-    const seconds = sec % 60;
-
-    return { hours, minutes, seconds };
-  }
-
-  const hours = toHHMMSS(seconds).hours;
-  const minutes = toHHMMSS(seconds).minutes;
-  const secs = toHHMMSS(seconds).seconds;
+  const hours = secToHHMMSS(seconds).hours;
+  const minutes = secToHHMMSS(seconds).minutes;
+  const secs = secToHHMMSS(seconds).seconds;
 
   return (
     <Card>
