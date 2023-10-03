@@ -11,12 +11,16 @@
   font-weight: bold;
 }
 
-.timeperiod {
-  font-size: 1rem;
+.miles {
   margin-bottom: 10px;
 }
 
-.miles {
+.period {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.number {
   font-size: 5rem;
   font-weight: bold;
   line-height: 1;
@@ -26,4 +30,8 @@
   font-size: 1rem;
   color: var(--text-secondary);
   font-weight: normal;
+}
+
+.stat {
+  display: flex;
 }

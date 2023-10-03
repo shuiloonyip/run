@@ -1,4 +1,6 @@
 import Card from "../../ui/Card/Card";
+import Stat from "../Stat/Stat";
+import { calcPace, secToHHMMSS } from "../../utils/time";
 import styles from "./RunOverview.module.css";
 
 function RunOverview({ runs }) {
@@ -12,6 +14,11 @@ function RunOverview({ runs }) {
   });
 
   const totalMiles = filteredRun.reduce((acc, curr) => acc + curr.distance, 0);
+  const totalSec = filteredRun.reduce((acc, curr) => acc + curr.seconds, 0);
+
+  const totalRuns = filteredRun.length;
+  const pace = calcPace(totalSec, totalMiles);
+  const totalTime = secToHHMMSS(totalSec);
 
   return (
     <div>
@@ -20,10 +27,15 @@ function RunOverview({ runs }) {
         <button>+</button>
       </div>
       <Card>
-        <div>
-          <div className={styles.timeperiod}>This Week</div>
-          <div className={styles.miles}>{totalMiles}</div>
+        <div className={styles.miles}>
+          <div className={styles.period}>This Week</div>
+          <div className={styles.number}>{totalMiles}</div>
           <div className={styles.label}>Miles</div>
+        </div>
+        <div className={styles.stat}>
+          <Stat stat={totalRuns} label="Runs"></Stat>
+          <Stat stat={pace} label="Pace"></Stat>
+          <Stat stat={totalTime} label="Time"></Stat>
         </div>
       </Card>
     </div>
