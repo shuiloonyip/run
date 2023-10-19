@@ -1,0 +1,21 @@
+.radioInput {
+  display: none;
+}
+
+.radioLabel {
+  display: block;
+  width: 100%;
+  padding: 5px 0;
+  color: #b8b1b1;
+  text-align: center;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.radioInput:checked + .radioLabel {
+  border-radius: 10px;
+  background: #ffffff;
+  color: #000000;
+  box-shadow: rgba(204, 200, 221, 0.2) 0 0 0 1px inset,
+    rgba(204, 200, 221, 0.2) 0 2px 5px 0;
+}

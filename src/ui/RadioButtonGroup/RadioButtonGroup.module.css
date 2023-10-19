@@ -1,0 +1,8 @@
+.radioGroup {
+  display: flex;
+  background: #f0ecec;
+  box-shadow: rgba(204, 200, 221, 0.2) 0 0 0 1px inset,
+    rgba(204, 200, 221, 0.2) 0 2px 5px 0;
+  border-radius: 10px;
+  padding: 2px;
+}

@@ -11,6 +11,10 @@
   font-weight: bold;
 }
 
+.periodButton {
+  margin-bottom: 20px;
+}
+
 .miles {
   margin-bottom: 10px;
 }

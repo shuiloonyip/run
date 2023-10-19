@@ -3,7 +3,7 @@ import styles from "./RunList.module.css";
 
 function RunList({ runs }) {
   return (
-    <div>
+    <>
       {runs.map((item) => (
         <RunItem
           key={item.id}
@@ -13,7 +13,7 @@ function RunList({ runs }) {
           seconds={item.seconds}
         />
       ))}
-    </div>
+    </>
   );
 }
 
