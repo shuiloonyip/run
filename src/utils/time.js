@@ -16,8 +16,7 @@ export function HHMMSSToSec(hour, min, sec) {
 
 export function calcPace(sec, miles) {
   const _sec = parseInt(sec, 10);
-  // .toFixed(2) returns string => "1.50"
-  // + changes string to number => 1.5
+  // .toFixed() returns string, + changes string to number
   const _miles = +parseFloat(miles).toFixed(2);
   const pace = _miles !== 0 ? Math.round(_sec / _miles) : 0;
 
