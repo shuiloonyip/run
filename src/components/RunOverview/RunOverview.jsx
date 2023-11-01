@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Stat from "../Stat/Stat";
+import Chart from "../Chart/Chart";
 import Card from "../../ui/Card/Card";
 import RadioButtonGroup from "../../ui/RadioButtonGroup/RadioButtonGroup";
 import RadioButton from "../../ui/RadioButton/RadioButton";
@@ -59,6 +60,37 @@ function RunOverview({ runs }) {
   const avgPace = calcPace(totalSec, totalMiles);
   const totalTime = secToHHMMSS(totalSec);
 
+  const data = [
+    {
+      y: Math.round(Math.random() * 20),
+      label: "Mon",
+    },
+    {
+      y: Math.round(Math.random() * 20),
+      label: "Tue",
+    },
+    {
+      y: Math.round(Math.random() * 20),
+      label: "Wed",
+    },
+    {
+      y: Math.round(Math.random() * 20),
+      label: "Thu",
+    },
+    {
+      y: Math.round(Math.random() * 20),
+      label: "Fri",
+    },
+    {
+      y: Math.round(Math.random() * 20),
+      label: "Sat",
+    },
+    {
+      y: Math.round(Math.random() * 20),
+      label: "Sun",
+    },
+  ];
+
   function handlePeriodChange(str) {
     setPeriod(str);
   }
@@ -92,6 +124,7 @@ function RunOverview({ runs }) {
           <Stat stat={avgPace} label="Pace"></Stat>
           <Stat stat={totalTime} label="Time"></Stat>
         </div>
+        <Chart data={data} />
       </Card>
     </>
   );

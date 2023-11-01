@@ -1,0 +1,41 @@
+.chart {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  padding: 20px 15px;
+  border-radius: 10px;
+  background: rgb(43, 42, 42);
+}
+
+.section {
+  display: table-cell;
+}
+
+.bar {
+  position: relative;
+  height: 200px;
+  width: 10px;
+  margin: 0 auto;
+}
+
+.value {
+  border-radius: 5px;
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgb(231, 231, 41);
+  animation: draw 1s ease-in-out;
+}
+
+.label {
+  margin-top: 5px;
+  color: white;
+  text-align: center;
+}
+
+@keyframes draw {
+  0% {
+    height: 0;
+  }
+}
