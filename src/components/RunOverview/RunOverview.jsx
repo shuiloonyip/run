@@ -18,12 +18,11 @@ function RunOverview({ runs }) {
 
   const [period, setPeriod] = useState(initialPeriod);
 
-  function filterRun(runs, period) {
+  function getPeriodStart(period) {
     const todayDateStr = new Date().toISOString().split("T")[0];
     const curr = new Date(todayDateStr);
 
     let start;
-    let end;
 
     if (period === "week") {
       start = new Date(
@@ -31,22 +30,41 @@ function RunOverview({ runs }) {
           curr.getDate() - curr.getDay() + (curr.getDay() === 0 ? -6 : 1)
         )
       );
+    } else if (period === "month") {
+      start = new Date(curr.getFullYear(), curr.getMonth(), 1);
+    } else if (period === "year") {
+      start = new Date(curr.getFullYear(), 0, 1);
+    }
+
+    return start;
+  }
+
+  function getPeriodEnd(period) {
+    const todayDateStr = new Date().toISOString().split("T")[0];
+    const curr = new Date(todayDateStr);
+
+    let end;
+
+    if (period === "week") {
       end = new Date(
         curr.setDate(
-          curr.getDate() - curr.getDay() + (curr.getDay() === 0 ? 0 : 7)
+          curr.getDate() - curr.getDay() + (curr.getDay() === 0 ? 1 : 8)
         )
       );
     } else if (period === "month") {
-      start = new Date(curr.getFullYear(), curr.getMonth(), 1);
-      end = new Date(curr.getFullYear(), curr.getMonth() + 1, 0);
+      end = new Date(curr.getFullYear(), curr.getMonth() + 1, 1);
     } else if (period === "year") {
-      start = new Date(curr.getFullYear(), 0, 1);
-      end = new Date(curr.getFullYear(), 11, 31);
-    } else if (period === "all") {
-      return runs;
+      end = new Date(curr.getFullYear() + 1, 0, 1);
     }
 
-    return runs.filter((run) => start <= run.date && run.date <= end);
+    return end;
+  }
+
+  function filterRun(runs, period) {
+    const start = getPeriodStart(period);
+    const end = getPeriodEnd(period);
+
+    return runs.filter((run) => start <= run.date && run.date < end);
   }
 
   const filteredRun = filterRun(runs, period);
@@ -60,36 +78,82 @@ function RunOverview({ runs }) {
   const avgPace = calcPace(totalSec, totalMiles);
   const totalTime = secToHHMMSS(totalSec);
 
-  const data = [
-    {
-      y: Math.round(Math.random() * 20),
-      label: "Mon",
-    },
-    {
-      y: Math.round(Math.random() * 20),
-      label: "Tue",
-    },
-    {
-      y: Math.round(Math.random() * 20),
-      label: "Wed",
-    },
-    {
-      y: Math.round(Math.random() * 20),
-      label: "Thu",
-    },
-    {
-      y: Math.round(Math.random() * 20),
-      label: "Fri",
-    },
-    {
-      y: Math.round(Math.random() * 20),
-      label: "Sat",
-    },
-    {
-      y: Math.round(Math.random() * 20),
-      label: "Sun",
-    },
-  ];
+  const data = mapRunsToBarData(filteredRun, period);
+
+  function isSameDate(dateOne, dateTwo) {
+    return (
+      dateOne.getFullYear() === dateTwo.getFullYear() &&
+      dateOne.getMonth() === dateTwo.getMonth() &&
+      dateOne.getDate() === dateTwo.getDate()
+    );
+  }
+
+  function isSameMonth(dateOne, dateTwo) {
+    return (
+      dateOne.getFullYear() === dateTwo.getFullYear() &&
+      dateOne.getMonth() === dateTwo.getMonth()
+    );
+  }
+
+  function getMonthEndDate(date) {
+    const d = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    return d.getDate();
+  }
+
+  function getDatapointLabel(period) {
+    if (period === "week") {
+      return ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    } else if (period === "month") {
+      const month = [];
+      const days = getMonthEndDate(new Date());
+      for (let i = 0; i < days; i++) {
+        month.push((i + 1).toString());
+      }
+      return month;
+    } else if (period === "year") {
+      return [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+    }
+  }
+
+  function mapRunsToBarData(runs, period) {
+    const startDate = getPeriodStart(period);
+    const datapoints = getDatapointLabel(period);
+    let filterRuns;
+
+    const barData = datapoints.map((datapoint, i) => {
+      if (period === "week" || period === "month") {
+        const start = new Date(startDate);
+        const date = new Date(start.setDate(start.getDate() + i));
+        filterRuns = runs.filter((run) => isSameDate(run.date, date));
+      } else if (period === "year") {
+        const start = new Date(startDate);
+        const date = new Date(start.setMonth(start.getMonth() + i));
+        filterRuns = runs.filter((run) => isSameMonth(run.date, date));
+      }
+
+      const value = filterRuns.reduce((acc, curr) => acc + curr.distance, 0);
+
+      return {
+        label: datapoint,
+        y: value,
+      };
+    });
+
+    return barData;
+  }
 
   function handlePeriodChange(str) {
     setPeriod(str);
