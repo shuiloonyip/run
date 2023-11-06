@@ -6,7 +6,8 @@ function Chart({ data }) {
   return (
     <div className={styles.chart}>
       {data.map((data, i) => {
-        const heightPercent = Math.round((data.y / max) * 100);
+        const heightPercent = max === 0 ? 0 : Math.round((data.y / max) * 100);
+
         return (
           <div key={i} className={styles.section}>
             <div className={styles.bar}>
