@@ -14,7 +14,7 @@ import {
 } from "../../utils/date";
 import styles from "./RunOverview.module.css";
 
-function RunOverview({ runs }) {
+function RunOverview({ runs, onOpenForm }) {
   const initialPeriod = "week";
   const periodLabel = {
     week: "This week",
@@ -97,21 +97,25 @@ function RunOverview({ runs }) {
 
   const data = mapRunsToBarData(filteredRun, period);
 
-  function handlePeriodChange(str) {
+  function handleChangePeriod(str) {
     setPeriod(str);
+  }
+
+  function handleOpenForm() {
+    onOpenForm(true);
   }
 
   return (
     <>
       <div className={styles.header}>
         <h1>Activity</h1>
-        <button>+</button>
+        <button onClick={handleOpenForm}>+</button>
       </div>
       <Card>
         <RadioButtonGroup
           name="period"
           defaultValue={initialPeriod}
-          onChange={handlePeriodChange}
+          onChange={handleChangePeriod}
           className={styles.periodButton}
         >
           <RadioButton value="week" label="Week" />

@@ -3,7 +3,7 @@ import Card from "../../ui/Card/Card";
 import { HHMMSSToSec } from "../../utils/time";
 import styles from "./RunForm.module.css";
 
-function RunForm({ onAddRun }) {
+function RunForm({ onAddRun, onCloseForm }) {
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [distance, setDistance] = useState("0");
   const [hours, setHours] = useState("0");
@@ -30,6 +30,10 @@ function RunForm({ onAddRun }) {
     setSeconds(event.target.value);
   }
 
+  function handleCloseForm() {
+    onCloseForm();
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -41,6 +45,8 @@ function RunForm({ onAddRun }) {
       distance: Number(distance),
       seconds: totalSeconds,
     });
+
+    onCloseForm();
   }
 
   return (
@@ -105,7 +111,9 @@ function RunForm({ onAddRun }) {
         </div>
         <div className={styles.buttonContainer}>
           <button type="submit">Add</button>
-          <button type="button">Cancel</button>
+          <button type="button" onClick={handleCloseForm}>
+            Cancel
+          </button>
         </div>
       </form>
     </Card>

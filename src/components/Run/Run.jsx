@@ -1,7 +1,7 @@
 import { useState } from "react";
 import RunOverview from "../RunOverview/RunOverview";
-import RunForm from "../RunForm/RunForm";
 import RunList from "../RunList/RunList";
+import RunFormModal from "../RunFormModal/RunFormModal";
 import styles from "./Run.module.css";
 
 const DUMMYDATA = [
@@ -27,15 +27,26 @@ const DUMMYDATA = [
 
 function Run() {
   const [runs, setRuns] = useState(DUMMYDATA);
+  const [showForm, setShowForm] = useState(false);
 
   function handleAddRun(run) {
     setRuns((prevState) => [...prevState, run]);
   }
 
+  function handleOpenForm() {
+    setShowForm(true);
+  }
+
+  function handleCloseForm() {
+    setShowForm(false);
+  }
+
   return (
     <div className={styles.container}>
-      <RunOverview runs={runs} />
-      <RunForm onAddRun={handleAddRun} />
+      {showForm === true ? (
+        <RunFormModal onAddRun={handleAddRun} onCloseForm={handleCloseForm} />
+      ) : null}
+      <RunOverview runs={runs} onOpenForm={handleOpenForm} />
       <RunList runs={runs} />
     </div>
   );
