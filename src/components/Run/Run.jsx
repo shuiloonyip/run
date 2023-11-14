@@ -30,7 +30,13 @@ function Run() {
   const [showForm, setShowForm] = useState(false);
 
   function handleAddRun(run) {
-    setRuns((prevState) => [...prevState, run]);
+    setRuns((prevState) => {
+      const arr = [...prevState, run];
+      arr.sort(function (a, b) {
+        return b.date - a.date;
+      });
+      return arr;
+    });
   }
 
   function handleOpenForm() {
