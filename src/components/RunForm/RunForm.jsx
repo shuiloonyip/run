@@ -4,30 +4,19 @@ import { HHMMSSToSec } from "../../utils/time";
 import styles from "./RunForm.module.css";
 
 function RunForm({ onAddRun, onCloseForm }) {
-  const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
-  const [distance, setDistance] = useState("0");
-  const [hours, setHours] = useState("0");
-  const [minutes, setMinutes] = useState("0");
-  const [seconds, setSeconds] = useState("0");
+  const [value, setValue] = useState({
+    date: new Date().toISOString().split("T")[0],
+    distance: "",
+    hours: "",
+    minutes: "",
+    seconds: "",
+  });
 
-  function handleDateChange(event) {
-    setDate(event.target.value);
-  }
-
-  function handleDistanceChange(event) {
-    setDistance(event.target.value);
-  }
-
-  function handleHoursChange(event) {
-    setHours(event.target.value);
-  }
-
-  function handleMinutesChange(event) {
-    setMinutes(event.target.value);
-  }
-
-  function handleSecondsChange(event) {
-    setSeconds(event.target.value);
+  function handleChangeValue(e) {
+    setValue((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
   }
 
   function handleCloseForm() {
@@ -37,12 +26,12 @@ function RunForm({ onAddRun, onCloseForm }) {
   function handleSubmit(event) {
     event.preventDefault();
 
-    const totalSeconds = HHMMSSToSec(hours, minutes, seconds);
+    const totalSeconds = HHMMSSToSec(value.hours, value.minutes, value.seconds);
 
     onAddRun({
       id: crypto.randomUUID(),
-      date: new Date(date),
-      distance: Number(distance),
+      date: new Date(value.date),
+      distance: Number(value.distance),
       seconds: totalSeconds,
     });
 
@@ -54,30 +43,37 @@ function RunForm({ onAddRun, onCloseForm }) {
       <form className={styles.form} onSubmit={handleSubmit}>
         <h2>Add run</h2>
         <div>
-          <label>Date</label>
+          <label htmlFor="date">Date</label>
           <input
             type="date"
-            onChange={handleDateChange}
-            value={date}
+            id="date"
+            name="date"
+            onChange={handleChangeValue}
+            value={value.date}
             required
           />
         </div>
         <div>
-          <label>Distance</label>
+          <label htmlFor="distance">Distance</label>
           <input
             type="number"
-            onChange={handleDistanceChange}
-            value={distance}
+            id="distance"
+            name="distance"
+            onChange={handleChangeValue}
+            value={value.distance}
+            min={0}
             required
           />
         </div>
         <div className={styles.time}>
           <div>
-            <label>Hours</label>
+            <label htmlFor="hours">Hours</label>
             <input
               type="number"
-              onChange={handleHoursChange}
-              value={hours}
+              id="hours"
+              name="hours"
+              onChange={handleChangeValue}
+              value={value.hours}
               step={1}
               min={0}
               max={24}
@@ -85,11 +81,13 @@ function RunForm({ onAddRun, onCloseForm }) {
             />
           </div>
           <div>
-            <label>Minutes</label>
+            <label htmlFor="minutes">Minutes</label>
             <input
               type="number"
-              onChange={handleMinutesChange}
-              value={minutes}
+              id="minutes"
+              name="minutes"
+              onChange={handleChangeValue}
+              value={value.minutes}
               step={1}
               min={0}
               max={59}
@@ -97,11 +95,13 @@ function RunForm({ onAddRun, onCloseForm }) {
             />
           </div>
           <div>
-            <label>Seconds</label>
+            <label htmlFor="seconds">Seconds</label>
             <input
               type="number"
-              onChange={handleSecondsChange}
-              value={seconds}
+              id="seconds"
+              name="seconds"
+              onChange={handleChangeValue}
+              value={value.seconds}
               step={1}
               min={0}
               max={59}
